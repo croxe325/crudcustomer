@@ -1,0 +1,97 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" media="screen"/>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/assets/css/starter-template.css}" rel="stylesheet" media="screen"/>
+
+</head>
+
+<body >
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CRUD TEST</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/customer">Data Customer</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Data Customer</h1>
+    <div class="form-group">
+        <a class="btn btn-default" href="/customer/create">Add New</a>
+    </div>
+    <div class="form-group">
+        <a class="btn btn-default" href="/report/pdf">Download PDF</a>
+    </div>
+    <div th:if="${not #lists.isEmpty(customerJoin)}">
+        <table class="table table-striped" id="example">
+            <thead>
+            <tr>
+                <th>Nama Customer</th>
+                <th>Alamat</th>
+                <th>Pendapatan</th>
+                <th>Kota</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customerJoin : ${customerJoin}">
+                <td th:text="${customerJoin.nama}"></td>
+                <td th:text="${customerJoin.alamat}"></td>
+                <td th:text="${customerJoin.pendapatan}"></td>
+                <td th:text="${customerJoin.nama_kota}"></td>
+                <td>
+                    <a th:href="${'/customer/edit/'+customerJoin.id}"><span class="glyphicon glyphicon-edit"></span> </a>
+                    <a th:href="${'/customer/hapus/'+customerJoin.id}" ><span class="glyphicon glyphicon-remove"></span> </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/assets/js/jquery.js}"></script>
+
+<script th:src="@{/assets/js/bootstrap.js}"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+</body>
+</html>
